@@ -6,7 +6,8 @@
 
   <groupId>mx.uaemex.sistemas</groupId>
   <artifactId>ProyectoSistemas</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.2</version>
+  <packaging>jar</packaging>
 
   <name>ProyectoSistemas</name>
   <!-- FIXME change it to the project's website -->
@@ -56,6 +57,16 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+            <outputDirectory>./build</outputDirectory>
+            <archive>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>lib/</classpathPrefix>
+                <mainClass>mx.uaemex.sistemas.App</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -73,6 +84,25 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <outputDirectory>${project.build.directory}/../build/lib</outputDirectory>
+            <excludeTransitive>false</excludeTransitive>
+            <stripVersion>false</stripVersion>
+            <includeScope>compile</includeScope>
+          </configuration>
+          <executions>
+            <execution>
+              <id>copy-dependencies</id>
+              <phase>prepare-package</phase>
+              <goals>
+                <goal>copy-dependencies</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

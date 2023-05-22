@@ -1,7 +1,6 @@
 package mx.uaemex.sistemas.gui;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MainWindow extends JFrame {
     public MainWindow() {

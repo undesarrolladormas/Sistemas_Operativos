@@ -1,35 +1,14 @@
-package mx.uaemex.sistemas.calendarizacion.algoritmos;
+package mx.uaemex.sistemas.scheduling;
 
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-
-import mx.uaemex.sistemas.calendarizacion.Event;
-import mx.uaemex.sistemas.calendarizacion.Row;
-
-/**
- *
- * @author erick
- */
 
 public class FirstComeFirstServe extends CPUScheduler
 {
     @Override
     public void process()
     {        
-        Collections.sort(this.getRows(), (Object o1, Object o2) -> {
-            if (((Row) o1).getArrivalTime() == ((Row) o2).getArrivalTime())
-            {
-                return 0;
-            }
-            else if (((Row) o1).getArrivalTime() < ((Row) o2).getArrivalTime())
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        });
+        this.getRows().sort(Comparator.comparingInt((Object o) -> ((Row) o).getArrivalTime()));
         
         List<Event> timeline = this.getTimeline();
         

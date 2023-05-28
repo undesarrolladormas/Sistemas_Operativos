@@ -1,26 +1,11 @@
-package mx.uaemex.sistemas.calendarizacion.algoritmos;
+package mx.uaemex.sistemas.scheduling;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import mx.uaemex.sistemas.calendarizacion.Event;
-import mx.uaemex.sistemas.calendarizacion.Row;
-import mx.uaemex.sistemas.calendarizacion.Utility;
+import java.util.*;
 
 public class RoundRobin extends CPUScheduler {
     @Override
     public void process() {
-        Collections.sort(this.getRows(), (Object o1, Object o2) -> {
-            if (((Row) o1).getArrivalTime() == ((Row) o2).getArrivalTime()) {
-                return 0;
-            } else if (((Row) o1).getArrivalTime() < ((Row) o2).getArrivalTime()) {
-                return -1;
-            } else {
-                return 1;
-            }
-        });
+        this.getRows().sort(Comparator.comparingInt((Object o) -> ((Row) o).getArrivalTime()));
 
         List<Row> rows = Utility.deepCopy(this.getRows());
         int time = rows.get(0).getArrivalTime();
@@ -28,7 +13,7 @@ public class RoundRobin extends CPUScheduler {
 
         while (!rows.isEmpty()) {
             Row row = rows.get(0);
-            int bt = (row.getBurstTime() < timeQuantum ? row.getBurstTime() : timeQuantum);
+            int bt = (Math.min(row.getBurstTime(), timeQuantum));
             this.getTimeline().add(new Event(row.getProcessName(), time, time + bt));
             time += bt;
             rows.remove(0);
@@ -55,7 +40,7 @@ public class RoundRobin extends CPUScheduler {
             for (Event event : this.getTimeline()) {
                 if (event.getProcessName().equals(row.getProcessName())) {
                     if (map.containsKey(event.getProcessName())) {
-                        int w = event.getStartTime() - (int) map.get(event.getProcessName());
+                        int w = event.getStartTime() - map.get(event.getProcessName());
                         row.setWaitingTime(row.getWaitingTime() + w);
                     } else {
                         row.setWaitingTime(event.getStartTime() - row.getArrivalTime());

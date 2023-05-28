@@ -15,8 +15,8 @@ public class MainWindow extends JFrame {
     private void init() {
         JTabbedPane pane = new JTabbedPane();
         pane.add("Inicio", new InfoPanel());
-        pane.add("Calendarizacion", new CalendarizacionPanel());
-        pane.add("Reemplazo de pagina", new JPanel());
+        pane.add("Calendarizacion", new SchedulePanel());
+        pane.add("Reemplazo de pagina", new ReplacementPanel());
         pane.add("Archivos",new JPanel());
 
         this.add(pane);

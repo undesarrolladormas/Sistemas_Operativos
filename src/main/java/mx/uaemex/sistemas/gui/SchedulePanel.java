@@ -12,16 +12,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import mx.uaemex.sistemas.calendarizacion.Event;
-import mx.uaemex.sistemas.calendarizacion.Row;
-import mx.uaemex.sistemas.calendarizacion.algoritmos.CPUScheduler;
-import mx.uaemex.sistemas.calendarizacion.algoritmos.FirstComeFirstServe;
-import mx.uaemex.sistemas.calendarizacion.algoritmos.PriorityNonPreemptive;
-import mx.uaemex.sistemas.calendarizacion.algoritmos.PriorityPreemptive;
-import mx.uaemex.sistemas.calendarizacion.algoritmos.RoundRobin;
-import mx.uaemex.sistemas.calendarizacion.algoritmos.ShortestJobFirst;
+import mx.uaemex.sistemas.scheduling.Event;
+import mx.uaemex.sistemas.scheduling.Row;
+import mx.uaemex.sistemas.scheduling.CPUScheduler;
+import mx.uaemex.sistemas.scheduling.FirstComeFirstServe;
+import mx.uaemex.sistemas.scheduling.PriorityNonPreemptive;
+import mx.uaemex.sistemas.scheduling.PriorityPreemptive;
+import mx.uaemex.sistemas.scheduling.RoundRobin;
+import mx.uaemex.sistemas.scheduling.ShortestJobFirst;
 
-public class CalendarizacionPanel extends JPanel {
+public class SchedulePanel extends JPanel {
     private final CustomPanel chartPanel;
     private final JTable table;
     private final JLabel wtResultLabel;
@@ -29,7 +29,7 @@ public class CalendarizacionPanel extends JPanel {
     private final JComboBox<String> option;
     private final DefaultTableModel model;
 
-    public CalendarizacionPanel() {
+    public SchedulePanel() {
         super();
         model = new DefaultTableModel(
                 new String[] { "Process", "Arrival Time", "Burst Time", "Priority", "Waiting T.", "TA. Time" }, 0);

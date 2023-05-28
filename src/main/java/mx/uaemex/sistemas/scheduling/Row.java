@@ -1,4 +1,4 @@
-package mx.uaemex.sistemas.calendarizacion;
+package mx.uaemex.sistemas.scheduling;
 
 public class Row
 {

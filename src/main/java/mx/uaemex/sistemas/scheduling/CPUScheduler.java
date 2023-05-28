@@ -1,9 +1,9 @@
-package mx.uaemex.sistemas.calendarizacion.algoritmos;
+package mx.uaemex.sistemas.scheduling;
 
 import java.util.ArrayList;
 
-import mx.uaemex.sistemas.calendarizacion.Event;
-import mx.uaemex.sistemas.calendarizacion.Row;
+import mx.uaemex.sistemas.scheduling.Event;
+import mx.uaemex.sistemas.scheduling.Row;
 
 public abstract class CPUScheduler {
     private final ArrayList<Row> rows;

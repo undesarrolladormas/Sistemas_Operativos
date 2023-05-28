@@ -1,25 +1,13 @@
-package mx.uaemex.sistemas.calendarizacion.algoritmos;
+package mx.uaemex.sistemas.scheduling;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-import mx.uaemex.sistemas.calendarizacion.Event;
-import mx.uaemex.sistemas.calendarizacion.Row;
-import mx.uaemex.sistemas.calendarizacion.Utility;
-
-public class ShortestJobFirst extends CPUScheduler {
+public class PriorityNonPreemptive extends CPUScheduler {
     @Override
     public void process() {
-        Collections.sort(this.getRows(), (Object o1, Object o2) -> {
-            if (((Row) o1).getArrivalTime() == ((Row) o2).getArrivalTime()) {
-                return 0;
-            } else if (((Row) o1).getArrivalTime() < ((Row) o2).getArrivalTime()) {
-                return -1;
-            } else {
-                return 1;
-            }
-        });
+        this.getRows().sort(Comparator.comparingInt((Object o) -> ((Row) o).getArrivalTime()));
 
         List<Row> rows = Utility.deepCopy(this.getRows());
         int time = rows.get(0).getArrivalTime();
@@ -33,15 +21,7 @@ public class ShortestJobFirst extends CPUScheduler {
                 }
             }
 
-            Collections.sort(availableRows, (Object o1, Object o2) -> {
-                if (((Row) o1).getBurstTime() == ((Row) o2).getBurstTime()) {
-                    return 0;
-                } else if (((Row) o1).getBurstTime() < ((Row) o2).getBurstTime()) {
-                    return -1;
-                } else {
-                    return 1;
-                }
-            });
+            availableRows.sort(Comparator.comparingInt((Object o) -> ((Row) o).getPriorityLevel()));
 
             Row row = availableRows.get(0);
             this.getTimeline().add(new Event(row.getProcessName(), time, time + row.getBurstTime()));

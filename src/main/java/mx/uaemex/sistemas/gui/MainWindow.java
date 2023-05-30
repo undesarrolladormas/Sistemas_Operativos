@@ -1,8 +1,10 @@
 package mx.uaemex.sistemas.gui;
 
 import javax.swing.*;
+import java.net.URL;
 
 public class MainWindow extends JFrame {
+
     public MainWindow() {
         super();
         this.setSize(1080,720);
@@ -17,7 +19,7 @@ public class MainWindow extends JFrame {
         pane.add("Inicio", new InfoPanel());
         pane.add("Calendarizacion", new SchedulePanel());
         pane.add("Reemplazo de pagina", new ReplacementPanel());
-        pane.add("Archivos",new JPanel());
+        pane.add("Archivos",new FilesPanel());
 
         this.add(pane);
     }
